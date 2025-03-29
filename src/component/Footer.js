@@ -34,7 +34,7 @@ const Footer = () => {
         <div className='info-text-row'>
         <div className="info-text-wrapper">
             <div className="info-text-1">전화번호</div>
-            <div className="info-text-2">1214-1256</div>
+            <div className="info-text-2">1213-1256</div>
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">개인정보보호책임자</div>
