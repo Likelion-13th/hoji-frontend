@@ -2,6 +2,7 @@ import './App.css';
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import Header from "./component/Header";
 import Footer from "./component/Footer";
 import Home from "./pages/Home/Home";
 import Mypage from "./pages/Mypage/Mypage";
@@ -12,6 +13,7 @@ import New from "./pages/ProductPage/New";
 function App() {
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element ={<Home />} />
         <Route path="/mypage" element ={<Mypage />} />

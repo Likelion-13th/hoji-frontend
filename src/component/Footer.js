@@ -20,7 +20,7 @@ const Footer = () => {
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">대표</div>
-            <div className="info-text-2">이지호</div>
+            <div className="info-text-2">hoji</div>
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">사업자등록번호</div>
@@ -28,7 +28,7 @@ const Footer = () => {
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">주소</div>
-            <div className="info-text-2">우리집</div>
+            <div className="info-text-2">경기도 고양시 덕양구 한국항공대학교</div>
         </div>
         </div>
         <div className='info-text-row'>
@@ -38,11 +38,11 @@ const Footer = () => {
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">개인정보보호책임자</div>
-            <div className="info-text-2">이지호</div>
+            <div className="info-text-2">hoji</div>
         </div>
         <div className="info-text-wrapper">
             <div className="info-text-1">계좌</div>
-            <div className="info-text-2">122-12-124124</div>
+            <div className="info-text-2">110-484-892463</div>
         </div>
         </div>
         </div>
