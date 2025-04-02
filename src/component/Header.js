@@ -8,7 +8,7 @@ const Header = () => {
 
     return (
         <header className="header-section">
-            <div className="header-title">LIKELION</div>
+            <Link to="/" className="header-title">LIKELION</Link>
             <div className="header-navigator">
                 <Link to="/new" className={currentPage === '/' || currentPage==="/new" ? "active" : "inactive"}>
                     New
