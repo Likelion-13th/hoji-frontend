@@ -1,10 +1,13 @@
 import React from 'react';
+import Menu from './Menu';
+import Banner from './Banner';
+import "../../styles/Home.css";
 
 const Home = () => {
     return (
-        <div>
-            <hi>야 너두 사장될 수 있어!</hi>
-            <p>멋쟁이 사자처럼 13기</p>
+        <div clasName = "home-container">
+            <Banner />
+            <Menu />
         </div>
     );
 };
