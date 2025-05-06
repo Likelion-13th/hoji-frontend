@@ -67,9 +67,9 @@
     display: flex;
     margin: 40px;
     width: 35%;
-}
-
-.info-text-section {
+  }
+  
+  .info-text-section {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -77,37 +77,39 @@
     justify-content: center;
     width: 50%;
     font-family: 'NanumMyeongjo-Regular';
-}
-
-.image-image {
-    width: 100%;
+  }
+  
+  .image-image {
     display: block;
-    padding: 25px 5px 10px 25px;
     background-color: transparent;
-}
-
-.image-label {
+    /* padding 제거 */
+  }
+  
+  .image-label {
     writing-mode: vertical-lr;
     text-align: right;
     font-size: 56px;
     font-family: 'KaiseiDecol-Regular';
-    padding-right: 20px;
-    padding-bottom: 10px;
-}
-
-.info-container {
+    /* padding 제거 */
+  }
+  
+  .info-container {
     display: flex;
     position: relative;
-    margin: 30px 50px;
+    padding: 30px 50px; /* margin → padding으로 변경 */
     justify-content: space-between;
-}
-
-.text-title {
+  }
+  
+  .text-title {
     font-size: 50px;
     padding-bottom: 25px;
-}
-
-.text-content {
+  }
+  
+  .text-content {
     font-size: 20px;
     padding: 25px 5px;
-}
+  }
+  
+  .profile-stat-value {
+    font-weight: 600px;
+  }
