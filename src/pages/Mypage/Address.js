@@ -16,7 +16,7 @@ const Address = () => {
 
     const handleSearchPostCode = () => {
         new window.daum.Postcode({
-            oncomplete: function(data) {
+            oncomplete: function (data) {
                 //성공 후의 로직
                 setZipcode(data.zonecode);
                 setAddress(data.roadAddress || data.jibunAddress);
@@ -33,7 +33,7 @@ const Address = () => {
                         <input className='address-input-post' value={zipcode} />
                     </div>
                     <div className='address-button'
-                    onClick={handleSearchPostCode}>우편번호 찾기</div>
+                        onClick={handleSearchPostCode}>우편번호 찾기</div>
                 </div>
                 <div className='address-section'>
                     <div className='address-base'>
@@ -49,9 +49,9 @@ const Address = () => {
                             onChange={handleAddressDetailChange}
                         />
                     </div>
-                    <div 
-                    className='address-button'
-                    onClick={handleSave}
+                    <div
+                        className='address-button'
+                        onClick={handleSave}
                     >저장
                     </div>
                 </div>
