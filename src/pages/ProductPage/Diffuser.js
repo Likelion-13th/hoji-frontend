@@ -75,7 +75,7 @@ const Diffuser = () => {
 
     return (
         <div>
-            <Banner title='banner' imagePath={'/banner_diffuser.jpg'} />
+            <Banner title='diffuser' imagePath={'/banner_diffuser.jpg'} />
             <div className='product-container'>
                 <div className='product-grid'>
                     {currentProducts.map((product) => (
