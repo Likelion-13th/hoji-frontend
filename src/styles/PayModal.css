@@ -147,6 +147,7 @@
     font-size: 14px;
     font-family: GmarketSans-Medium;
     margin-bottom: 12px;
+    text-align: right;
 }
 .total-value-discount {
     color: #d26156;
