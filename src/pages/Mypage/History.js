@@ -1,10 +1,7 @@
 import React from 'react';
 
-const History = () => {
-    const onCancel = () => {
-        // API 호출
-        alert('취소');
-    }
+const History = ({ historyData = [], onCancel }) => {
+
     return (
         <div className='history-container-wrap'>
             <div className='history-title'>나의 쇼핑 내역</div>
@@ -21,90 +18,37 @@ const History = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>05.01</td>
-                            <td>
-                                <div className='history-product'>
-                                    <img
+                        {historyData.map((order) => (
+                            <tr key={order.orderId}>
+                                {/* 주문 일자 */}
+                                <td>{new Date(order.createdAt).toLocaleDateString('ko-KR')}</td>
+                                {/* 상품 정보 */}
+                                <td>{order.itemName}</td>
+                                {/* 수량 */}
+                                <td>{order.quantity}</td>
+                                {/* 구매 금액 */}
+                                <td>{order.totalPrice.toLocaleString()}원</td>
+                                {/* 상태 */}
+                                <td>{order.status}</td>
+                                {/* 주문 취소 */}
+                                <td>
+                                    {(() => {
+                                        const canCancel = order.status === 'PROCESSING';
 
-                                        className="product-img"
-                                        src={`${process.env.PUBLIC_URL}/img/product.jpg`}
-                                        alt="about"
-                                    />
-                                    <div className='history-product-section'>
-                                        <div className='history-product-title'>Le Labo Another 13</div>
-                                        <div className='history-product-sub'>A clean, musky, and woody fragrance.</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td>1,000원</td>
-                            <td>배송중</td>
-                            <td>
-                                <div className='history-cancel'>
-                                    <div
-                                        className='history-cancel-button'
-                                        onClick={onCancel}
-                                    >취소</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>05.02</td>
-                            <td>
-                                <div className='history-product'>
-                                    <img
+                                        if (!canCancel) {
+                                            return <span>-</span>;
+                                        }
 
-                                        className="product-img"
-                                        src={`${process.env.PUBLIC_URL}/img/product.jpg`}
-                                        alt="about"
-                                    />
-                                    <div className='history-product-section'>
-                                        <div className='history-product-title'>Le Labo Another 13</div>
-                                        <div className='history-product-sub'>A clean, musky, and woody fragrance.</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td>1,000원</td>
-                            <td>주문취소</td>
-                            <td>
-                                <div className='history-cancel'>
-                                    <div
-                                        className='history-cancel-button'
-                                        onClick={onCancel}
-                                    >취소</div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>05.03</td>
-                            <td>
-                                <div className='history-product'>
-                                    <img
-
-                                        className="product-img"
-                                        src={`${process.env.PUBLIC_URL}/img/product.jpg`}
-                                        alt="about"
-                                    />
-                                    <div className='history-product-section'>
-                                        <div className='history-product-title'>Le Labo Another 13</div>
-                                        <div className='history-product-sub'>A clean, musky, and woody fragrance.</div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td>1,000원</td>
-                            <td>배송완료</td>
-                            <td>
-                                <div className='history-cancel'>
-                                    <div
-                                        className='history-cancel-button'
-                                        onClick={onCancel}
-                                    >취소</div>
-                                </div>
-                            </td>
-                        </tr>
+                                        return (
+                                            <div className='history-cancel'>
+                                                <div className='history-cancel-button'
+                                                onClick={()=>onCancel(order.orderId)}>취소</div>
+                                            </div>
+                                        );
+                                    })()}
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

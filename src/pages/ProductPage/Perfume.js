@@ -1,147 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from '../ProductPage/Banner';
 import ProductCard from '../ProductPage/ProductCard';
 import '../../styles/ProductPage.css';
 import PayModal from '../../component/PayModal';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const Perfume = () => {
-    const products = [
-        {
-            id: 1,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_1.png",
-            isNew: false,
-        },
-        {
-            id: 2,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_2.png",
-            isNew: false,
-        },
-        {
-            id: 3,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_3.png",
-            isNew: false,
-        },
-        {
-            id: 4,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_4.png",
-            isNew: false,
-        },
-        {
-            id: 5,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_5.png",
-            isNew: false,
-        },
-        {
-            id: 6,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_6.png",
-            isNew: false,
-        },
-        {
-            id: 7,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_7.png",
-            isNew: false,
-        }
-        ,
-
-        {
-            id: 8,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_8.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 9,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_9.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 10,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_10.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 11,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_11.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 12,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_12.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 13,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_13.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 14,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_14.png",
-            isNew: false,
-        }
-        ,
-        {
-            id: 15,
-            name: "퍼퓸",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/perfume_15.png",
-            isNew: false,
-        }
-    ];
-
+    const [cookies] = useCookies(['accessToken']);
+    const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
 
     const handleCardClick = (product) => {
         setSelectedProduct(product);
+        if (typeof cookies.accessToken !== 'string') {
+            alert("로그인이 필요합니다.");
+            return;
+        }
         setModalOpen(true);
     }
 
@@ -162,6 +38,20 @@ const Perfume = () => {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
+
+    useEffect(() => {
+        axios.get("/categories/3/items", {
+            headers: {
+                accept: "*/*",
+            },
+        })
+            .then((res) => {
+                setProducts(res.data.result);
+            })
+            .catch((err) => {
+                console.log("API 요청 실패", err);
+            });
+    }, []);
 
     return (
         <div>
@@ -206,7 +96,7 @@ const Perfume = () => {
             </div>
             {isModalOpen && (<PayModal product={selectedProduct} onClose={handleCloseModal} />)}
         </div>
-    );
+    )
 };
 
 export default Perfume;

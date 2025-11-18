@@ -1,60 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Banner from './Banner';
 import ProductCard from './ProductCard';
 import '../../styles/ProductPage.css';
 import PayModal from '../../component/PayModal';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const Diffuser = () => {
-    const products = [
-        {
-            id: 1,
-            name: "디퓨저",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/diffuser_1.png",
-            isNew: false,
-        },
-        {
-            id: 2,
-            name: "디퓨저",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/diffuser_2.png",
-            isNew: false,
-        },
-        {
-            id: 3,
-            name: "디퓨저",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/diffuser_3.png",
-            isNew: false,
-        },
-        {
-            id: 4,
-            name: "디퓨저",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/diffuser_4.png",
-            isNew: false,
-        },
-        {
-            id: 5,
-            name: "디퓨저",
-            brand: "브랜드",
-            price: 30000,
-            imagePath: "/img/diffuser_5.png",
-            isNew: false,
-        },
-    ]
-
+    const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [cookies] = useCookies(['accessToken']);
 
     const handleCardClick = (product) => {
+        if (typeof cookies.accessToken !== 'string') {
+            alert("로그인이 필요합니다.");
+            return;
+        }
         setSelectedProduct(product);
         setModalOpen(true);
     }
+
     const handleCloseModal = () => {
         setSelectedProduct(null);
         setModalOpen(false);
@@ -72,6 +38,20 @@ const Diffuser = () => {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     }
+
+    useEffect(() => {
+        axios.get("/categories/2/items", {
+            headers: {
+                accept: "*/*",
+            },
+        })
+            .then((res) => {
+                setProducts(res.data.result);
+            })
+            .catch((err) => {
+                console.log("API 요청 실패", err);
+            });
+    }, []);
 
     return (
         <div>

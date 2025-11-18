@@ -1,16 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/PayModal.css';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const PayModal = ({ product, onClose }) => {
     const [quantity, setQuantity] = useState(1);
 
     const [mileageToUse, setMileageToUse] = useState("");
 
-    const maxMileage = 100000;
+    // const maxMileage = 100000;
 
     const [, setProductPrice] = useState(product.price);
 
     const [totalPrice, setTotalPrice] = useState(product.price);
+
+    const [maxMileage, setMaxMileage] = useState(0);
+
+    const [cookies] = useCookies(['accessToken']);
+
+    useEffect(() => {
+        axios.get("/users/mileage", {
+            headers: {
+                accept: "*/*",
+                Authorization: `Bearer ${cookies.accessToken}`,
+            },
+        })
+            .then((res) => {
+                setMaxMileage(res.data.result.maxMileage); // 백엔드 구조 확인
+            })
+            .catch((err) => {
+                console.log("LOGOUT API 요청 실패", err);
+            });
+    }, []);
+
+    const handlePayment = async () => {
+        try {
+            const response = await axios.post(
+                "/orders",
+                {
+                    itemId: product.id,
+                    quantity: quantity,
+                    mileageToUse: mileageToUse,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${cookies.accessToken}`,
+                    },
+                }
+            );
+
+            if (response.data.isSuccess) {
+                alert("주문이 성공적으로 생성되었습니다.");
+                onClose();
+            } else {
+                alert(`주문 실패: ${response.data.message}`);
+            }
+        } catch (err) {
+            console.error("결제 오류:", err);
+            alert("결제 처리 중 오류가 발생했습니다.");
+        }
+    }
 
     const handleQuantityChange = (type) => {
         setQuantity((prev) => (type === 'plus' ? prev + 1 : Math.max(1, prev - 1)));
@@ -99,7 +149,7 @@ const PayModal = ({ product, onClose }) => {
                         </div>
                     </div>
                 </div>
-                <button className='pay-button'>결제하기</button>
+                <button className='pay-button' onClick={handlePayment}>결제하기</button>
             </div>
         </div>
     )
