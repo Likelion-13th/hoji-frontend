@@ -51,7 +51,7 @@ const Perfume = () => {
             .catch((err) => {
                 console.log("API 요청 실패", err);
             });
-    }, []);
+    }, [cookies.accessToken]);
 
     return (
         <div>

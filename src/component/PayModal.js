@@ -31,7 +31,7 @@ const PayModal = ({ product, onClose }) => {
             .catch((err) => {
                 console.log("LOGOUT API 요청 실패", err);
             });
-    }, []);
+    }, [cookies.accessToken]);
 
     const handlePayment = async () => {
         try {
