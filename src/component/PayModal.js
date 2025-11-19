@@ -35,8 +35,7 @@ const PayModal = ({ product, onClose }) => {
 
     const handlePayment = async () => {
         try {
-            const response = await axios.post(
-                "/orders",
+            const response = await axios.post("/orders",
                 {
                     itemId: product.id,
                     quantity: quantity,
@@ -54,13 +53,13 @@ const PayModal = ({ product, onClose }) => {
                 alert("주문이 성공적으로 생성되었습니다.");
                 onClose();
             } else {
-                alert(`주문 실패: ${response.data.message}`);
+                alert(`주문 생성에 실패: ${response.data.message}`);
             }
-        } catch (err) {
-            console.error("결제 오류:", err);
-            alert("결제 처리 중 오류가 발생했습니다.");
+        } catch (error) {
+            alert("주문 생성 중 오류가 발생했습니다.");
+            console.error("결제 실패: ", error);
         }
-    }
+    };
 
     const handleQuantityChange = (type) => {
         setQuantity((prev) => (type === 'plus' ? prev + 1 : Math.max(1, prev - 1)));
