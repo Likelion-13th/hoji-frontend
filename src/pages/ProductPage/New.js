@@ -3,8 +3,10 @@ import Banner from '../ProductPage/Banner';
 import ProductCard from './ProductCard';
 import '../../styles/ProductPage.css';
 import PayModal from '../../component/PayModal';
+import { useCookies } from 'react-cookie';
 
 const New = () => {
+    const [cookies] = useCookies(['accessToken']);
     const products = [
         {
             id: 1,
