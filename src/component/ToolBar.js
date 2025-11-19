@@ -16,7 +16,7 @@ const handleLoginRedirect = () => {
         ? "http://localhost:3000"
         : "https://hoji-likelion.netlify.app";
 
-    const oauthUrl = "https://Sajang-dev-env.eba-mrv3fmzy.ap-northeast-2.elasticbeanstalk.com/oauth2/start/kakao" + 
+    const oauthUrl = "http://Sajang-dev-env.eba-mrv3fmzy.ap-northeast-2.elasticbeanstalk.com/oauth2/start/kakao" + 
         `?redirect_uri=${encodeURIComponent(redirectUrl)}`;
     
         window.location.href =oauthUrl;
