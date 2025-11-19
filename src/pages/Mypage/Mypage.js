@@ -30,24 +30,24 @@ const Mypage = () => {
                     },
                 }
             );
-    
+
             if (response.data.isSuccess) {
                 alert("주소가 성공적으로 저장되었습니다.");
             } else {
                 alert(`주소 저장 실패: ${response.data.message}`);
             }
         } catch (err) {
-            console.error("주소 저장 오류:", err); 
+            console.error("주소 저장 오류:", err);
             alert("주소 저장 중 오류가 발생했습니다.");
         }
     };
 
     useEffect(() => {
         axios
-            .get("/orders", {
+            .get("/orders/", {
                 headers: {
                     accept: "*/*",
-                    Authorization: `Bearer ${cookies.accessToken}`, 
+                    Authorization: `Bearer ${cookies.accessToken}`,
                 },
             })
             .then((res) => {
@@ -56,14 +56,14 @@ const Mypage = () => {
             })
             .catch((err) => {
                 console.log("API 요청 실패:", err);
-            }); 
+            });
     }, [cookies.accessToken]);
 
     const onCancel = async (orderId) => {
         try {
             const response = await axios.post(
                 `/orders/${orderId}/cancel`,
-                {"orderId": orderId},
+                { "orderId": orderId },
                 {
                     headers: {
                         "Content-Type": "application/json",
@@ -78,11 +78,11 @@ const Mypage = () => {
                 alert(`주문 취소 실패: ${response.data.message}`);
             }
         } catch (err) {
-            console.error("주문 취소 오류:", err); 
+            console.error("주문 취소 오류:", err);
             alert("주문 취소 중 오류가 발생했습니다.");
         }
     };
-    
+
     useEffect(() => {
         axios
             .get("/users/profile", {
@@ -107,10 +107,10 @@ const Mypage = () => {
 
     return (
         <div className='page-container'>
-            <Profile profileData={profileData}/>
-            <Status orderStatusData={orderStatusData}/>
-            <Address handleSave={handleSave}/>
-            <History historyData={historyData} onCancel={onCancel}/>
+            <Profile profileData={profileData} />
+            <Status orderStatusData={orderStatusData} />
+            <Address handleSave={handleSave} />
+            <History historyData={historyData} onCancel={onCancel} />
         </div>
     );
 };
