@@ -13,11 +13,11 @@ const Diffuser = () => {
     const [cookies] = useCookies(['accessToken']);
 
     const handleCardClick = (product) => {
+        setSelectedProduct(product);
         if (typeof cookies.accessToken !== 'string') {
             alert("로그인이 필요합니다.");
             return;
         }
-        setSelectedProduct(product);
         setModalOpen(true);
     }
 

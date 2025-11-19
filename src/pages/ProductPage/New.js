@@ -53,6 +53,10 @@ const New = () => {
 
     const handleCardClick = (product) => {
         setSelectedProduct(product);
+        if(typeof Cookies.accessToken !== 'string') {
+            alert("로그인이 필요합니다.");
+            return;
+        }
         setModalOpen(true);
     }
 
