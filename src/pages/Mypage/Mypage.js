@@ -61,9 +61,9 @@ const Mypage = () => {
 
     const onCancel = async (orderId) => {
         try {
-            const response = await axios.post(
+            const response = await axios.put(
                 `/orders/${orderId}/cancel`,
-                { "orderId": orderId },
+                {},
                 {
                     headers: {
                         "Content-Type": "application/json",
