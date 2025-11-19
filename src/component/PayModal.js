@@ -53,11 +53,11 @@ const PayModal = ({ product, onClose }) => {
                 alert("주문이 성공적으로 생성되었습니다.");
                 onClose();
             } else {
-                alert(`주문 생성에 실패: ${response.data.message}`);
+                alert(`주문 실패: ${response.data.message}`);
             }
         } catch (error) {
-            alert("주문 생성 중 오류가 발생했습니다.");
-            console.error("결제 실패: ", error);
+            console.error("결제 오류:", error);
+            alert("결제 처리 중 오류가 발생했습니다.");
         }
     };
 
