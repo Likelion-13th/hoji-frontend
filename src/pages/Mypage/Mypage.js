@@ -44,7 +44,7 @@ const Mypage = () => {
 
     useEffect(() => {
         axios
-            .get("/orders/", {
+            .get("/orders", {
                 headers: {
                     accept: "*/*",
                     Authorization: `Bearer ${cookies.accessToken}`,
