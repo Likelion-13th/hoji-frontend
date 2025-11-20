@@ -10,6 +10,7 @@ const New = () => {
     const [cookies] = useCookies(['accessToken']);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
+    const [products, setProducts] = useState([]);
 
     const handleCardClick = (product) => {
         setSelectedProduct(product);
